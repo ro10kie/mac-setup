@@ -68,6 +68,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'development/docker',
         'development/visual-studio-code',
+        'development/jetbrains-ides',
         'development/sublime-text',
         'development/vim',
         'development/rstudio',
