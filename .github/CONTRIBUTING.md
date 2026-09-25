@@ -1,20 +1,20 @@
-# Contributing to macOS Setup Guide
+# Contributing
 
-Contributions to macOS Setup Guide are more than welcome.
+This Apple Silicon setup guide welcomes corrections and focused improvements.
+New tools should have a clear use case and a known installation source.
 
-## License
+Keep one tool per page in one of the four sections: System & Core Development
+Setup, Languages & Build Tools, Development Tools & Apps, or CLI & Terminal
+Utilities. Use English for guide content. Include practical Installation and
+Usage sections, and add Customization or More only when there is useful
+content. Prefer official documentation for commands and compatibility claims.
+The [contribution template](CONTRIBUTION_TEMPLATE.md) gives a short outline.
 
-By contributing code to macOS Setup Guide, you agree to license your
-contribution under the [MIT License](../LICENSE).
+To check the site locally:
 
-## Installing dependencies and linting
+```sh
+npm ci
+make ci
+```
 
-Run `make deps` first to make sure all the dependencies are installed in the workspace. Then run `make lint` before submitting your PR to make sure your changes comply
-with our styling.
-
-## How to contribute to macOS Setup Guide
-
-If you would like to submit a pull request, please base it on our
-[template](CONTRIBUTION_TEMPLATE.md). Not only does this make things easier for
-_you_ to know what to include in your contribution, it makes the guide more
-consistent which results in a better experience for the user. Thank you.
+Contributions are covered by the repository's [MIT License](../LICENSE).
