@@ -14,19 +14,27 @@ site to browse their individual tool pages from the sidebar.
 ## Preview the site
 
 This repository uses [Docusaurus](https://docusaurus.io/) and requires Node.js
-20 or newer. From the repository root, build the site and serve it locally:
+20 or newer. From the repository root, install dependencies once (and again
+when the lockfile changes):
 
 ```sh
 npm ci
-npm run build
-mkdir -p /tmp/mac-setup-preview
-ln -sfn "$PWD/build" /tmp/mac-setup-preview/mac-setup
-python3 -m http.server 3000 --bind 127.0.0.1 --directory /tmp/mac-setup-preview
 ```
 
-Open <http://127.0.0.1:3000/mac-setup/> in a browser. After editing the
-guide, run `npm run build` again and refresh the page. Stop the server with
-Ctrl+C.
+Build the site:
+
+```sh
+npm run build
+```
+
+Serve the build locally:
+
+```sh
+npm run serve
+```
+
+Open <http://localhost:3000/mac-setup/> in a browser. After editing the guide,
+run `npm run build` again and refresh the page. Stop the server with Ctrl+C.
 
 ## Credits
 
