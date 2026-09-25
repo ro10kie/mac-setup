@@ -1,29 +1,24 @@
 {
   "name": "mac-setup",
   "version": "0.0.0",
-  "homepage": "https://sourabhbajaj.com/mac-setup/",
-  "description": "Installing Development environment on macOS",
+  "homepage": "https://ro10kie.github.io/mac-setup/",
+  "description": "A development setup guide for Apple Silicon Macs",
   "private": true,
   "scripts": {
     "start": "docusaurus start",
     "build": "docusaurus build",
     "serve": "docusaurus serve",
     "lint": "markdownlint . --ignore node_modules --ignore build",
-    "install-deps": "yarn install",
-
-    "_below_here_is_from": "docusaurus_",
     "docusaurus": "docusaurus",
     "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@docusaurus/core": "3.8.1",
-    "@docusaurus/plugin-google-gtag": "^3.8.1",
-    "@docusaurus/preset-classic": "3.8.1",
+    "@docusaurus/core": "3.10.2",
+    "@docusaurus/preset-classic": "3.10.2",
     "@easyops-cn/docusaurus-search-local": "^0.52.1",
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.0.0",
@@ -33,16 +28,14 @@
   },
   "devDependencies": {
     "markdownlint-cli": "0.45.0",
-    "node-fetch": "^3.3.1",
-
-    "@docusaurus/module-type-aliases": "3.8.1",
-    "@docusaurus/tsconfig": "3.8.1",
-    "@docusaurus/types": "3.8.1",
+    "@docusaurus/module-type-aliases": "3.10.2",
+    "@docusaurus/tsconfig": "3.10.2",
+    "@docusaurus/types": "3.10.2",
     "typescript": "~5.6.2"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sb2nov/mac-setup.git"
+    "url": "https://github.com/ro10kie/mac-setup.git"
   },
   "keywords": [
     "Install",
@@ -53,10 +46,10 @@
     "Setup",
     "Instruction"
   ],
-  "author": "Sourabh Bajaj",
+  "author": "ro10kie",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sb2nov/mac-setup/issues"
+    "url": "https://github.com/ro10kie/mac-setup/issues"
   },
   "browserslist": {
     "production": [
@@ -71,6 +64,6 @@
     ]
   },
   "engines": {
-    "node": ">=18.0"
+    "node": ">=20.0"
   }
 }

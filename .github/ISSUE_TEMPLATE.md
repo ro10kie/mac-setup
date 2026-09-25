@@ -1,27 +1,12 @@
-<!--
-   Hi,
-   Thanks for taking the time to contribute to making this guide even better!
-   While we do appreciate bug reports, we would love to see a PR fixing the issue even more.
-   This guide is intended to be built by the community and not only the maintainers :)
-   We (the maintainers) don't know everything, but if we all work together we can make this
-   guide the best available. Thank you <3
--->
+### Page or section
 
-### I'm Submitting a ...
-<!-- Put an "x" in the box for the type of report that apply, like this [x] -->
-```
-[ ] Bug report
-[ ] Tool/language/etc documentation request
-```
+Link to the page that needs a correction or describe where a new topic belongs.
 
-### Bug Location
-<!-- A link or a screenshot with an explanation is sufficient -->
+### Problem or use case
 
-### Tool/Language/etc
-<!--
-  What tool, language or other software that you think this guide
-  should include and also _why_ you think it should be included.
--->
+Describe what is inaccurate, unclear, or missing, and why it matters for this
+Apple Silicon setup.
 
-### Other Information
-<!-- Any other information you'd like to include -->
+### Source or example
+
+If possible, include an official source or a command that reproduces the issue.

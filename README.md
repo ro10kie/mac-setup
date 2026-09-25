@@ -1,34 +1,35 @@
-# [macOS Setup Guide](https://sourabhbajaj.com/mac-setup)
+# macOS Setup Guide
 
-[![Test](https://github.com/sb2nov/mac-setup/workflows/Test/badge.svg)](https://github.com/sb2nov/mac-setup/actions?query=workflow%3ATest) [![Validate URLs](https://github.com/sb2nov/mac-setup/actions/workflows/links.yml/badge.svg?branch=main)](https://github.com/sb2nov/mac-setup/actions/workflows/links.yml)
+A development setup guide for Apple Silicon Macs. The sections group core
+setup, languages and build tools, development applications, and terminal
+utilities. Each tool has its own installation and usage page.
 
-This guide covers the basics of setting up a development environment on a new
-Mac. Whether you are an experienced programmer or not, this guide is intended
-for everyone to use as a reference for setting up your environment or
-installing languages/libraries.
+**Install only what you need.** Choose tools that support the work you plan to
+do, and keep project dependencies with their projects.
 
-[![Screen](https://raw.githubusercontent.com/sb2nov/mac-setup/refs/heads/main/static/assets/intro.gif)](https://raw.githubusercontent.com/sb2nov/mac-setup/refs/heads/main/static/assets/intro.gif)
+The guide has four sections: System & Core Development Setup, Languages &
+Build Tools, Development Tools & Apps, and CLI & Terminal Utilities. Open the
+site to browse their individual tool pages from the sidebar.
 
-Some environments we will set up are [Node](https://nodejs.org)
-(JavaScript), [Python](https://www.python.org),
-[C++](http://www.cplusplus.com) and [Ruby](https://www.ruby-lang.org).
-Even if you don't program in all of them, they are useful to have as many
-command-line tools rely on them. We'll also show you some useful daily use
-applications. As you read and follow these steps, feel free to post any
-feedback or comments you may have.
+## Preview the site
 
-## Contributing to the guide
+This repository uses [Docusaurus](https://docusaurus.io/) and requires Node.js
+20 or newer. From the repository root, build the site and serve it locally:
 
-All contributions to the guide are welcome. Please help add support for other
-libraries and languages. To make a contribution please use our [contribution
-template](https://github.com/sb2nov/mac-setup/blob/main/.github/CONTRIBUTION_TEMPLATE.md).
+```sh
+npm ci
+npm run build
+mkdir -p /tmp/mac-setup-preview
+ln -sfn "$PWD/build" /tmp/mac-setup-preview/mac-setup
+python3 -m http.server 3000 --bind 127.0.0.1 --directory /tmp/mac-setup-preview
+```
 
-**We're looking for more contributors to maintain and extend the
-documentation.**
+Open <http://127.0.0.1:3000/mac-setup/> in a browser. After editing the
+guide, run `npm run build` again and refresh the page. Stop the server with
+Ctrl+C.
 
--------------------------------------------------------------------------------
+## Credits
 
-This guide is [MIT
-licensed](https://github.com/sb2nov/mac-setup/blob/main/LICENSE) and has been
-generated using [Docusaurus](https://docusaurus.io/). Feel free to contribute or
-create new issues on [GitHub](https://github.com/sb2nov/mac-setup/issues).
+This fork adapts [Sourabh Bajaj's macOS Setup
+Guide](https://sourabhbajaj.com/mac-setup/). The original project and this
+adaptation are licensed under the [MIT License](LICENSE).
