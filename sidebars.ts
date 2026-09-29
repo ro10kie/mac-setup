@@ -46,6 +46,7 @@ const sidebars: SidebarsConfig = {
           label: 'Node.js',
           items: [
             'languages/nodejs/nodejs',
+            'languages/nodejs/fnm',
             'languages/nodejs/npm',
           ],
         },
@@ -80,8 +81,11 @@ const sidebars: SidebarsConfig = {
       label: 'CLI & Terminal Utilities',
       items: [
         'utilities/ripgrep',
+        'utilities/fd',
         'utilities/fzf',
+        'utilities/zoxide',
         'utilities/tree',
+        'utilities/jq',
       ],
     },
   ],

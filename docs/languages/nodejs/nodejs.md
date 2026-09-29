@@ -2,30 +2,18 @@
 title: Node.js
 ---
 
-[Node.js](https://nodejs.org/) runs JavaScript outside the browser. It also
-provides the runtime for many frontend build tools. Homebrew installs Node.js
-and its bundled [npm](./npm.md) command.
+[Node.js](https://nodejs.org/) runs JavaScript outside the browser. It provides
+the runtime for server applications, development tools, and frontend build
+systems. Each Node.js installation includes [npm](./npm.md), which manages
+JavaScript packages and project scripts.
 
-## Installation
+## Why use fnm?
 
-Install Node.js and its bundled npm with Homebrew:
+Different projects may need different Node.js versions. [fnm](./fnm.md) keeps
+multiple versions available, lets you choose a default, and can select a
+project's version automatically from `.node-version` or `.nvmrc`. This makes it
+easier to return to a project with the runtime version it expects.
 
-```sh
-brew install node
-```
-
-Check the Node.js version:
-
-```sh
-node --version
-```
-
-Check the npm version:
-
-```sh
-npm --version
-```
-
-Node.js releases change over time. If a project specifies a Node.js version
-in `package.json`, `.nvmrc`, or its documentation, check compatibility before
-using the Homebrew version.
+In this guide, Homebrew installs and updates fnm, while fnm installs and
+manages Node.js. The [fnm page](./fnm.md) covers installation and version
+selection.

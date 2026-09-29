@@ -42,6 +42,15 @@ you want attached to commits:
 git config --global user.email "AUTHOR_EMAIL"
 ```
 
+Optionally, set the branch name that future `git init` commands will use.
+Replace `BRANCH` with the name you want:
+
+```sh
+git config --global init.defaultBranch BRANCH
+```
+
+This setting does not rename branches in existing repositories.
+
 Review your global Git settings:
 
 ```sh
@@ -53,11 +62,59 @@ commits to you. The name and email identify the author of a commit; they do not
 sign you in to GitHub. See the [Git setup guide](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup)
 for configuration details.
 
+### Authenticate to GitHub
+
+Choose SSH or HTTPS before connecting a repository. Use a remote URL that
+matches your choice. The commit author settings above are separate from GitHub
+authentication.
+
+For SSH, first check whether you already have a key that you can use:
+
+```sh
+ls -al ~/.ssh
+```
+
+If the directory does not exist, you have no keys there yet. If
+`~/.ssh/id_ed25519` does not already exist and you need a new key, generate
+one with your GitHub email address:
+
+```sh
+ssh-keygen -t ed25519 -C "AUTHOR_EMAIL"
+```
+
+When asked where to save the key, press Enter to use the default
+`~/.ssh/id_ed25519` path, then set a passphrase. Never overwrite an existing
+key. Follow [GitHub's macOS SSH key instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent?platform=mac)
+to add the private key to the SSH agent and macOS Keychain.
+
+Copy the **public** key at `~/.ssh/id_ed25519.pub`:
+
+```sh
+pbcopy < ~/.ssh/id_ed25519.pub
+```
+
+Add that public key in GitHub under **Settings → SSH and GPG keys → New SSH
+key**. Keep the private key on your Mac. Then test the connection:
+
+```sh
+ssh -T git@github.com
+```
+
+On the first connection, compare the displayed host fingerprint with
+[GitHub's published fingerprints](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints)
+before accepting it. A successful test identifies your GitHub account, even
+though `ssh -T` may exit with status 1. See [GitHub's SSH test guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/testing-your-ssh-connection?platform=mac).
+
+If you prefer HTTPS, follow [GitHub's credential setup guide](https://docs.github.com/en/get-started/git-basics/caching-your-github-credentials-in-git).
+GitHub does not accept your account password for Git operations over HTTPS;
+use a supported credential method. Never put a token in a remote URL.
+
 ## Usage
 
 Run Git commands from a project's directory unless stated otherwise. Uppercase
-words such as `FILE`, `BRANCH`, `REMOTE`, `REMOTE_URL`, `COMMIT`, and `MESSAGE`
-are placeholders; replace them with your own values.
+words such as `FILE`, `BRANCH`, `BASE_BRANCH`, `FEATURE_BRANCH`, `REMOTE`,
+`REMOTE_URL`, `COMMIT`, and `MESSAGE` are placeholders; replace them with your
+own values.
 
 ### Start or copy a repository
 
@@ -86,6 +143,43 @@ other files you do not want to track to `.gitignore` before staging them.
 | `git log --oneline` | Show commit history as a compact list. |
 | `git show COMMIT` | Show the details and changes in a particular commit. |
 
+### Ignore local and generated files
+
+Create a `.gitignore` file in the repository root to keep files that should
+stay local out of new commits. Add only patterns that fit your project. For
+example:
+
+```gitignore
+.DS_Store
+*.log
+node_modules/
+.env
+```
+
+Here, `*.log` matches log files, `node_modules/` matches directories with that
+name, and `.env` is a common place for local settings or secrets. The file
+itself should be committed so other contributors use the same patterns. See
+the [Git ignore pattern reference](https://git-scm.com/docs/gitignore) for
+more pattern rules.
+
+Check which files Git is ignoring:
+
+```sh
+git status --ignored --short
+```
+
+`.gitignore` applies to untracked files. If a file is already tracked, remove
+it from Git's index while keeping the local copy:
+
+```sh
+git rm --cached FILE
+```
+
+Then stage `.gitignore`, review the staged changes, and commit them using the
+commands in [Review and commit changes](#review-and-commit-changes). If a
+secret was already committed, this step does not remove it from Git history;
+rotate the secret and follow [GitHub's guidance for sensitive data](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository).
+
 ### Work with branches
 
 A branch lets you develop a change without moving another branch forward until
@@ -102,31 +196,243 @@ you are ready to merge it.
 
 ### Connect a local project to GitHub
 
-If the project is not yet a Git repository, run `git init`, stage files, and
-make a commit using the commands above. If it is already a Git repository,
-keep its existing history. On GitHub, create an **empty** repository with no
-initial commit, then copy its HTTPS or SSH URL as `REMOTE_URL`. An empty
-remote avoids starting a separate history from your local commits. If you
-cloned the repository, it normally already has a remote; check before adding
-another one.
+Use this workflow when a project already exists on your Mac and you want to
+publish it to a new GitHub repository. Run each command from the project root.
+If you cloned the project from GitHub, it normally already has a remote; check
+that remote instead of creating a new repository.
 
-Use the commands below from the local repository. `REMOTE` is the short name
-you choose for the remote; use the same name in later commands.
+1. Check whether the project is already a Git repository:
 
-| Command | What it does |
-| --- | --- |
-| `git remote -v` | Show existing remote names and URLs. Run it before adding a remote and again afterward to verify the URL. |
-| `git remote add REMOTE REMOTE_URL` | Save the GitHub repository URL under a local remote name. This does not upload code yet. |
-| `git remote set-url REMOTE REMOTE_URL` | Change the URL of an existing remote instead of adding a duplicate. Use only if its URL needs updating. |
-| `git branch --show-current` | Check the local branch name you intend to publish. |
-| `git branch -m BRANCH` | Optionally rename the current branch before publishing it. Skip this if its name is already the one you want. |
-| `git push -u REMOTE BRANCH` | Push the committed branch to GitHub and set its upstream for later `git push` and `git pull` commands. |
+   ```sh
+   git status
+   ```
 
-You need at least one local commit before the first push. GitHub authentication
-is separate from the commit name and email: HTTPS and SSH each require a
-supported [authentication method](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-authentication-to-github).
-See GitHub's [guide to adding locally hosted code](https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github)
-for the full workflow.
+   If Git reports that this is not a repository, initialize it:
+
+   ```sh
+   git init
+   ```
+
+   If it is already a repository, keep its existing history and skip `git init`.
+
+2. If an existing repository already has a commit and no new changes, skip
+   this step. Otherwise, review or create `.gitignore` before staging, so
+   local files and secrets are not included. Stage the remaining files:
+
+   ```sh
+   git add -A
+   ```
+
+   Check the staged file names:
+
+   ```sh
+   git status
+   ```
+
+   Review the staged changes:
+
+   ```sh
+   git diff --staged
+   ```
+
+   Commit the staged changes:
+
+   ```sh
+   git commit -m "MESSAGE"
+   ```
+
+   A new repository needs at least one commit before its first push.
+
+3. On GitHub, create an **empty** repository without a README, `.gitignore`,
+   or license. Copy its SSH or HTTPS URL as `REMOTE_URL`, matching the
+   authentication method you set up above.
+
+4. Check whether the local repository already has a remote:
+
+   ```sh
+   git remote -v
+   ```
+
+   If it has no remote for this GitHub repository, add one. `REMOTE` is the
+   short name you choose for it:
+
+   ```sh
+   git remote add REMOTE REMOTE_URL
+   ```
+
+   If that remote already exists but points to the wrong URL, change it only
+   when you intend to replace the existing destination:
+
+   ```sh
+   git remote set-url REMOTE REMOTE_URL
+   ```
+
+   Check the resulting URL before publishing:
+
+   ```sh
+   git remote -v
+   ```
+
+5. Check the name of the local branch you want to publish:
+
+   ```sh
+   git branch --show-current
+   ```
+
+   Replace `BRANCH` with that name, then push the branch and set its upstream:
+
+   ```sh
+   git push -u REMOTE BRANCH
+   ```
+
+   Open the repository on GitHub to confirm that your files and commit appear.
+   See [GitHub's guide to adding locally hosted code](https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github)
+   for more detail.
+
+### Develop and merge a feature branch
+
+Use this workflow in a repository that already has a remote. `BASE_BRANCH` is
+the branch you want to merge into, and `FEATURE_BRANCH` is the new branch for
+your change. Start with a clean working tree.
+
+1. Switch to the base branch:
+
+   ```sh
+   git switch BASE_BRANCH
+   ```
+
+   Update it without creating a merge commit; `--ff-only` stops if the local
+   and remote histories have diverged:
+
+   ```sh
+   git pull --ff-only REMOTE BASE_BRANCH
+   ```
+
+2. Create and switch to a feature branch:
+
+   ```sh
+   git switch -c FEATURE_BRANCH
+   ```
+
+3. After editing files, stage the changes you want to include:
+
+   ```sh
+   git add FILE
+   ```
+
+   Review the staged changes:
+
+   ```sh
+   git diff --staged
+   ```
+
+   Commit them with a descriptive message:
+
+   ```sh
+   git commit -m "MESSAGE"
+   ```
+
+4. Publish the feature branch and set its upstream:
+
+   ```sh
+   git push -u REMOTE FEATURE_BRANCH
+   ```
+
+5. On GitHub, open a pull request with `FEATURE_BRANCH` as the compare branch
+   and `BASE_BRANCH` as the base branch. Review it and merge it on GitHub.
+   Then switch back to the local base branch:
+
+   ```sh
+   git switch BASE_BRANCH
+   ```
+
+   Bring in the merged changes:
+
+   ```sh
+   git pull --ff-only REMOTE BASE_BRANCH
+   ```
+
+   See [GitHub's pull request guide](https://docs.github.com/en/pull-requests/get-started/pull-request-quickstart)
+   for the web steps.
+
+If you can push directly to `BASE_BRANCH`, you can merge locally **instead of**
+opening a pull request. After publishing the feature branch in step 4, switch
+to the base branch:
+
+```sh
+git switch BASE_BRANCH
+```
+
+Update it before merging:
+
+```sh
+git pull --ff-only REMOTE BASE_BRANCH
+```
+
+Merge the feature branch into it:
+
+```sh
+git merge FEATURE_BRANCH
+```
+
+After resolving any reported conflicts and completing the merge, publish the
+updated base branch:
+
+```sh
+git push REMOTE BASE_BRANCH
+```
+
+Choose either the pull request route or the local merge route for a change;
+do not do both.
+
+### Resolve a local merge conflict
+
+When `git merge FEATURE_BRANCH` stops with conflicts, check which files need
+attention:
+
+```sh
+git status
+```
+
+Open each conflicted file. For a conflict within a file, Git marks the two
+versions with `<<<<<<<`, `=======`, and `>>>>>>>`. Edit the file into the final
+content you want, remove those markers, and save it. A deleted-file conflict
+may instead require you to decide whether to keep or delete that file.
+
+Mark each resolved file as ready for the merge:
+
+```sh
+git add FILE
+```
+
+If you decided to delete a conflicted file, stage that decision instead:
+
+```sh
+git rm FILE
+```
+
+Check that no unmerged files remain:
+
+```sh
+git status
+```
+
+Complete the merge after resolving every conflict:
+
+```sh
+git merge --continue
+```
+
+Git may open an editor for the merge commit message. Check the final status
+before pushing. If you want to abandon an unfinished merge instead, run:
+
+```sh
+git merge --abort
+```
+
+Start a merge with a clean working tree: Git may be unable to restore
+uncommitted changes when aborting. See [Git's merge documentation](https://git-scm.com/docs/git-merge)
+for details.
 
 ### Keep a repository in sync
 

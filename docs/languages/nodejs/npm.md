@@ -8,11 +8,8 @@ title: npm
 
 ## Installation
 
-Install Node.js through Homebrew; npm is included:
-
-```sh
-brew install node
-```
+Install [Node.js through fnm](./fnm.md). npm is included with the selected
+Node.js version, so it does not need a separate Homebrew installation.
 
 Check the npm version:
 
