@@ -273,16 +273,28 @@ that remote instead of creating a new repository.
    git remote -v
    ```
 
-5. Check the name of the local branch you want to publish:
+5. This workflow uses `main` as the branch name on GitHub. Check the current
+   local branch name:
 
    ```sh
    git branch --show-current
    ```
 
-   Replace `BRANCH` with that name, then push the branch and set its upstream:
+   The initial branch name depends on `init.defaultBranch`; it may be `master`
+   or another name. If the current branch is not already `main`, rename it:
 
    ```sh
-   git push -u REMOTE BRANCH
+   git branch -M main
+   ```
+
+   This keeps the branch's existing commits. `-M` forces the rename, so do not
+   use it to replace a different local branch already named `main`. See
+   [Git's branch reference](https://git-scm.com/docs/git-branch) for details.
+
+   Push `main` to GitHub and set its upstream:
+
+   ```sh
+   git push -u REMOTE main
    ```
 
    Open the repository on GitHub to confirm that your files and commit appear.
@@ -451,5 +463,31 @@ Once a branch has an upstream, these commands cover the usual remote workflow:
 | `git restore --staged FILE` | Remove a file from the staging area while keeping its working-directory changes. |
 | `git restore FILE` | Discard unstaged changes to a tracked file. Check `git diff` first: these edits will be lost. |
 | `git revert COMMIT` | Create a new commit that reverses an earlier commit while preserving the existing history. |
+
+If you forgot to include a change in your latest commit and have not pushed
+that commit yet, stage the change:
+
+```sh
+git add FILE
+```
+
+Review all staged changes that will be included in the replacement commit:
+
+```sh
+git diff --staged
+```
+
+Update the latest commit with those staged changes while keeping its message:
+
+```sh
+git commit --amend --no-edit
+```
+
+`--amend` replaces the latest commit, and `--no-edit` keeps its existing message
+without opening an editor. Unstaged changes are not included. Adding these
+changes gives the replacement commit a new hash, so use this workflow for
+commits you have not pushed. For a commit that is already shared, make a new
+commit instead. See [Git's commit reference](https://git-scm.com/docs/git-commit)
+for details.
 
 For more commands and options, see the [Git reference](https://git-scm.com/docs).
