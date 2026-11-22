@@ -1,39 +1,28 @@
 ---
 slug: /
 title: macOS Setup Guide
-description: Installing Development environment on macOS
+description: A development setup guide for Apple Silicon Macs
 id: intro
 ---
 
-[![Test](https://github.com/sb2nov/mac-setup/workflows/Test/badge.svg)](https://github.com/sb2nov/mac-setup/actions?query=workflow%3ATest) [![Validate URLs](https://github.com/sb2nov/mac-setup/actions/workflows/links.yml/badge.svg?branch=main)](https://github.com/sb2nov/mac-setup/actions/workflows/links.yml)
+This guide explains how to set up development tools on an Apple Silicon Mac.
+Each tool has its own page with installation steps and examples of everyday
+use.
 
-This guide covers the basics of setting up a development environment on a new
-Mac. Whether you are an experienced programmer or not, this guide is intended
-for everyone to use as a reference for setting up your environment or
-installing languages/libraries.
+**Install only what you need.** Start with the core setup, then choose the
+languages, applications, and terminal utilities that support your projects.
+Homebrew installs many system-wide tools; dependencies needed by one project
+should stay with that project.
 
-![Screen](/assets/intro.gif)
+The sidebar groups the pages into four sections:
 
-Some environments we will set up are [Node](https://nodejs.org)
-(JavaScript), [Python](https://www.python.org),
-[C++](http://www.cplusplus.com) and [Ruby](https://www.ruby-lang.org).
-Even if you don't program in all of them, they are useful to have as many
-command-line tools rely on them. We'll also show you some useful daily use
-applications. As you read and follow these steps, feel free to post any
-feedback or comments you may have.
+1. System & Core Development Setup
+2. Languages & Build Tools
+3. Development Tools & Apps
+4. CLI & Terminal Utilities
 
-## Contributing to the guide
+Open a section in the sidebar, then choose the page for the tool you need.
 
-All contributions to the guide are welcome. Please help add support for other
-libraries and languages. To make a contribution please use our [contribution
-template](https://github.com/sb2nov/mac-setup/blob/main/.github/CONTRIBUTION_TEMPLATE.md).
-
-**We're looking for more contributors to maintain and extend the
-documentation.**
-
----
-
-This guide is [MIT
-licensed](https://github.com/sb2nov/mac-setup/blob/main/LICENSE) and has been
-generated using [Docusaurus](https://docusaurus.io/). Feel free to contribute or
-create new issues on [GitHub](https://github.com/sb2nov/mac-setup/issues).
+This adaptation is based on [Sourabh Bajaj's macOS Setup
+Guide](https://sourabhbajaj.com/mac-setup/) and remains under the
+[MIT License](https://github.com/ro10kie/mac-setup/blob/main/LICENSE).

@@ -1,122 +1,19 @@
-/**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
- */
-
-/* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-color-primary: #245a91;
+  --ifm-color-primary-dark: #205182;
+  --ifm-color-primary-darker: #1e4c7a;
+  --ifm-color-primary-darkest: #193f65;
+  --ifm-color-primary-light: #2863a0;
+  --ifm-color-primary-lighter: #2a68a8;
+  --ifm-color-primary-lightest: #327bc6;
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
-}
-
-/* Contributors page styling */
-.contributors-table {
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: 0 !important;
-}
-
-.contributors-table table {
-  width: 100% !important;
-  table-layout: fixed;
-  border-collapse: collapse;
-}
-
-.contributors-table img {
-  width: 80px !important;
-  height: 80px !important;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid var(--ifm-color-primary-light);
-  transition: transform 0.2s ease;
-}
-
-.contributors-table img:hover {
-  transform: scale(1.1);
-  border-color: var(--ifm-color-primary);
-}
-
-.contributors-table td {
-  text-align: center;
-  vertical-align: top;
-  padding: 16px 8px;
-  word-wrap: break-word;
-  min-width: 0;
-  width: 16.66%; /* 100% / 6 columns */
-}
-
-.contributors-table a {
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 500;
-  display: block;
-  margin-top: 8px;
-  color: var(--ifm-color-primary);
-}
-
-.contributors-table a:hover {
-  color: var(--ifm-color-primary-dark);
-  text-decoration: underline;
-}
-
-/* Remove table borders and header */
-.contributors-table table,
-.contributors-table th,
-.contributors-table td {
-  border: none !important;
-}
-
-.contributors-table thead {
-  display: none;
-}
-
-/* Responsive design for contributors table */
-@media (max-width: 768px) {
-  .contributors-table img {
-    width: 60px !important;
-    height: 60px !important;
-  }
-  
-  .contributors-table a {
-    font-size: 0.8rem;
-  }
-  
-  .contributors-table td {
-    padding: 12px 4px;
-  }
-}
-
-@media (max-width: 480px) {
-  .contributors-table img {
-    width: 50px !important;
-    height: 50px !important;
-  }
-  
-  .contributors-table a {
-    font-size: 0.7rem;
-  }
-  
-  .contributors-table td {
-    padding: 8px 2px;
-  }
+  --ifm-color-primary: #76b7f2;
+  --ifm-color-primary-dark: #57a7ef;
+  --ifm-color-primary-darker: #47a0ed;
+  --ifm-color-primary-darkest: #2388e3;
+  --ifm-color-primary-light: #95c7f5;
+  --ifm-color-primary-lighter: #a5cff7;
+  --ifm-color-primary-lightest: #d3e8fb;
 }
